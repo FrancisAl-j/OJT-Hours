@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "./components/Nav";
 import {
   BrowserRouter as Router,
@@ -10,11 +10,24 @@ import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import { checkAuth } from "./redux/thunks/authThunks.js";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { user, isCheckingAuth } = useSelector((state) => state.auth);
   console.log(user);
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, []);
+
+  if (isCheckingAuth && !user) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <Router>

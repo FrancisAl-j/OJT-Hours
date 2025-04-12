@@ -77,7 +77,7 @@ const Signin = () => {
                 </span>
               </Link>
             </p>
-            {error && <p>{error}</p>}
+            {error && <p className="text-sm text-red-600">{error}</p>}
           </form>
         </div>
 

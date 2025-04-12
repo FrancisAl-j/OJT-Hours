@@ -2,6 +2,18 @@ import axios from "axios";
 const baseURL = "http://localhost:3000/api/auth/";
 
 export const auth = {
+  //! Checking authentication to keep users login
+  checkAuth: async () => {
+    try {
+      const res = await axios.get(`${baseURL}check`, {
+        withCredentials: true,
+      });
+
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  },
   //! Log in
   login: async (formData) => {
     try {

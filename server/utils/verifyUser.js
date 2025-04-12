@@ -13,6 +13,8 @@ export const verifyToken = async (req, res, next) => {
     // Decoding the token
     const token_decode = jwt.verify(token, process.env.SECRET_KEY);
     req.user = token_decode;
+
+    next();
   } catch (error) {
     res.status(401).json({ message: "User is not authenticated." });
   }

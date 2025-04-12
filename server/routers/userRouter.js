@@ -1,9 +1,9 @@
 import express from "express";
 import {
-  checkAuth,
   logout,
   signin,
   signup,
+  checkAuth,
 } from "../controllers/userController.js";
 import { verifyToken } from "../utils/verifyUser.js";
 

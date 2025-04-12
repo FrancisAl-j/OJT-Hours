@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -17,6 +20,13 @@ const Signup = () => {
       [name]: value,
     });
   };
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+
+    dispatch();
+  };
+
   return (
     <div className="h-[100svh] grid place-items-center">
       <section className="flex w-full flex-row-reverse">

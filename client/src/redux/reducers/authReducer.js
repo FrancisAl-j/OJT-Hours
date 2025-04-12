@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signin } from "../thunks/authThunks.js";
+import { signin, checkAuth } from "../thunks/authThunks.js";
 
 // Initial State of auth
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
   isSigningIn: false,
   isCheckingAuth: true,
   error: null,
+  checkingAuthError: null,
 };
 
 const authSlice = createSlice({
@@ -17,6 +18,7 @@ const authSlice = createSlice({
 
   // For API's
   extraReducers: (builder) => {
+    //! FOR SIGNIN
     // Pending
     builder.addCase(signin.pending, (state) => {
       state.isSigningIn = true;
@@ -35,7 +37,25 @@ const authSlice = createSlice({
       state.isSigningIn = false;
       state.error = action.payload;
     });
-  },
+    //! End of Signin
+
+    //! FOR CHECKING AUTHENTICATON
+    builder.addCase(checkAuth.pending, (state) => {
+      state.isCheckingAuth = true;
+      state.checkingAuthError = null;
+    });
+
+    builder.addCase(checkAuth.fulfilled, (state, action) => {
+      state.isCheckingAuth = false;
+      state.user = action.payload;
+      state.checkingAuthError = null;
+    });
+
+    builder.addCase(checkAuth.rejected, (state, action) => {
+      state.isCheckingAuth = false;
+      state.checkingAuthError = action.payload;
+    }); //! End of checking authentication
+  }, //! <- End of Builder
 });
 
 export default authSlice.reducer;
