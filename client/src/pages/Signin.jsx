@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signin } from "../redux/thunks/authThunks.js";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { error, isSigningIn } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,11 +23,24 @@ const Signin = () => {
     });
   };
 
+  // Logging in Function
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const result = await dispatch(signin(formData));
+
+    if (signin.fulfilled.match(result)) {
+      navigate("/");
+    }
+  };
+
   return (
     <div className="h-[100svh] grid place-items-center">
       <section className="flex w-full">
         <div className="flex-1 grid place-items-center">
-          <form className="form-container shadow-2xl shadow-black p-4 rounded-xl">
+          <form
+            onSubmit={handleSignIn}
+            className="form-container shadow-2xl shadow-black p-4 rounded-xl"
+          >
             <h1 className="text-white text-2xl mb-6">Log in your account</h1>
 
             <div className="w-full flex flex-col gap-5">
@@ -46,18 +65,19 @@ const Signin = () => {
               </div>
 
               <button className="p-1 rounded-2xl bg-[#169976] cursor-pointer text-white my-4">
-                Sign in
+                {isSigningIn ? "Signing in..." : "Sign in"}
               </button>
             </div>
 
             <p className="text-white">
               Don't have an account?{" "}
               <Link to="/signup">
-                <span className="text-blue-600 cursor-pointer">
+                <span className="text-blue-600 cursor-pointer underline">
                   Sign up here.
                 </span>
               </Link>
             </p>
+            {error && <p>{error}</p>}
           </form>
         </div>
 

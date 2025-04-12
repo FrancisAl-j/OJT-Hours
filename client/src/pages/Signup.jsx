@@ -61,10 +61,10 @@ const Signup = () => {
             </div>
 
             <p className="text-white">
-              Don't have an account?{" "}
-              <Link to="/signup">
-                <span className="text-blue-600 cursor-pointer">
-                  Sign up here.
+              Already have an account?{" "}
+              <Link to="/signin">
+                <span className="text-blue-600 cursor-pointer underline">
+                  Sign in here.
                 </span>
               </Link>
             </p>

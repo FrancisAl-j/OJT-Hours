@@ -1,11 +1,21 @@
 import React from "react";
 import Nav from "./components/Nav";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+
   return (
     <Router>
       <div className="">
@@ -13,7 +23,10 @@ const App = () => {
 
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={user ? <Home /> : <Navigate to="/signin" />}
+            />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>
