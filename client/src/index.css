@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+body {
+  background: #222222;
+}
+
+/* Class names */
+.form-container {
+  width: min(100% - 20px, 400px);
+}
