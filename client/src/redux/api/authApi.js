@@ -38,4 +38,18 @@ export const auth = {
       throw error;
     }
   },
+
+  logout: async () => {
+    try {
+      const res = await axios.post(
+        `${baseURL}logout`,
+        {},
+        { withCredentials: true }
+      );
+
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signin, checkAuth, signup } from "../thunks/authThunks.js";
+import { signin, checkAuth, signup, logout } from "../thunks/authThunks.js";
 
 // Initial State of auth
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
   isSigningUp: false,
   isSigningIn: false,
   isCheckingAuth: true,
+  isLoggingOut: false,
   error: null,
   checkingAuthError: null,
 };
@@ -69,6 +70,23 @@ const authSlice = createSlice({
 
     builder.addCase(signup.rejected, (state, action) => {
       state.isSigningUp = false;
+      state.error = action.payload;
+    });
+
+    //! LOGOUT
+    builder.addCase(logout.pending, (state) => {
+      state.isLoggingOut = true;
+      state.error = null;
+    });
+
+    builder.addCase(logout.fulfilled, (state, action) => {
+      state.isLoggingOut = false;
+      state.user = null;
+      state.error = null;
+    });
+
+    builder.addCase(logout.rejected, (state, action) => {
+      state.isLoggingOut = false;
       state.error = action.payload;
     });
   }, //! <- End of Builder

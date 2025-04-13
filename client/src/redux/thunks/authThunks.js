@@ -42,3 +42,13 @@ export const signup = createAsyncThunk(
     }
   }
 );
+
+export const logout = createAsyncThunk("auth/logout", async () => {
+  try {
+    const res = await auth.logout();
+
+    return res.data;
+  } catch (error) {
+    return rejectWithValue(error.response?.data?.message || "Sign-in failed");
+  }
+});
