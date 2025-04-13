@@ -40,8 +40,14 @@ const App = () => {
               path="/"
               element={user ? <Home /> : <Navigate to="/signin" />}
             />
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/signin"
+              element={user ? <Navigate to="/" /> : <Signin />}
+            />
+            <Route
+              path="/signup"
+              element={user ? <Navigate to="/" /> : <Signup />}
+            />
           </Routes>
         </main>
       </div>

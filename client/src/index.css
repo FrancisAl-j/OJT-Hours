@@ -8,3 +8,7 @@ body {
 .form-container {
   width: min(100% - 20px, 400px);
 }
+
+.hero-content {
+  width: min(100% - 10px, 800px);
+}
