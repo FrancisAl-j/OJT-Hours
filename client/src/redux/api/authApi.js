@@ -14,12 +14,24 @@ export const auth = {
       throw error;
     }
   },
+
   //! Log in
   login: async (formData) => {
     try {
       const res = await axios.post(`${baseURL}signin`, formData, {
         withCredentials: true,
       });
+
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  //! Sign up
+  signup: async (formData) => {
+    try {
+      const res = await axios.post(`${baseURL}signup`, formData);
 
       return res;
     } catch (error) {

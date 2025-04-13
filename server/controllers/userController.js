@@ -101,9 +101,6 @@ export const logout = async (req, res) => {
  */
 export const checkAuth = async (req, res) => {
   try {
-    console.log("CheckAuth function has been called.");
-    console.log("User ID from token:", req.user.id); // Make sure the user ID is valid
-
     const user = await User.findById(req.user.id).select("-password");
     if (!user) {
       return res.status(401).json({ message: "User is not authenticated." });

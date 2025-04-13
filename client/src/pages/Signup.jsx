@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signup } from "../redux/thunks/authThunks.js";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isSigningUp } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -21,17 +23,24 @@ const Signup = () => {
     });
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    dispatch();
+    const result = await dispatch(signup(formData));
+
+    if (signup.fulfilled.match(result)) {
+      navigate("/signin");
+    }
   };
 
   return (
     <div className="h-[100svh] grid place-items-center">
       <section className="flex w-full flex-row-reverse">
         <div className="flex-1 grid place-items-center">
-          <form className="form-container shadow-2xl shadow-black p-4 rounded-xl">
+          <form
+            onSubmit={handleSignup}
+            className="form-container shadow-2xl shadow-black p-4 rounded-xl"
+          >
             <h1 className="text-white text-2xl mb-6">Create an account</h1>
 
             <div className="w-full flex flex-col gap-5">
@@ -66,7 +75,7 @@ const Signup = () => {
               </div>
 
               <button className="p-1 rounded-2xl bg-[#169976] cursor-pointer text-white my-4">
-                Sign in
+                {isSigningUp ? "Signing up..." : "Sign up"}
               </button>
             </div>
 
