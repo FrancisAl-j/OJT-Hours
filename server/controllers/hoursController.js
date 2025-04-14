@@ -13,6 +13,10 @@ export const createHours = async (req, res) => {
       hoursTarget,
       userId: user._id,
     });
+
+    await newHours.save();
+
+    res.status(201).json(newHours);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
