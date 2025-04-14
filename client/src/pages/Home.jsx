@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Time from "../components/Time";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
@@ -19,6 +20,8 @@ const Home = () => {
           </button>
         </div>
       </section>
+
+      <Time />
     </div>
   );
 };
