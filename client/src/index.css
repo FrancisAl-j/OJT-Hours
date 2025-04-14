@@ -12,3 +12,7 @@ body {
 .hero-content {
   width: min(100% - 10px, 800px);
 }
+
+.clock-container {
+  width: min(100% - 20px, 600px);
+}
