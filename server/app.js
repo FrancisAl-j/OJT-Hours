@@ -17,6 +17,7 @@ import cookieParser from "cookie-parser";
  */
 import connectDb from "./utils/connectDb.js";
 import userRouter from "./routers/userRouter.js";
+import hoursRouter from "./routers/hoursRouter.js";
 
 const app = express();
 
@@ -42,6 +43,9 @@ app.get("/", (req, res) => {
 
 //! Authentication API
 app.use("/api/auth", userRouter);
+
+//! Hours API
+app.use("/api/hours", hoursRouter);
 
 app.listen(PORT, () => {
   console.log(`App listening to http://localhost:${PORT}`);

@@ -18,3 +18,7 @@ const hoursSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+const Hours = mongoose.model("hours", hoursSchema);
+
+export default Hours;
