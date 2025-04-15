@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 const Time = () => {
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [hours, setHours] = useState(
+    parseInt(localStorage.getItem("hours")) || 0
+  );
+  const [minutes, setMinutes] = useState(
+    parseInt(localStorage.getItem("minutes")) || 0
+  );
+  const [seconds, setSeconds] = useState(
+    parseInt(localStorage.getItem("seconds")) || 0
+  );
   const [isActive, setIsActive] = useState(false);
 
   const getTime = () => {
@@ -20,14 +26,21 @@ const Time = () => {
           if (prevSec === 59) {
             setMinutes((prevMins) => {
               if (prevMins === 59) {
-                setHours((hours) => hours + 1);
+                setHours((hours) => {
+                  hours + 1;
+                  localStorage.setItem("hours", hours + 1);
+                });
+                localStorage.setItem("minutes", 0);
                 return 0;
               } else {
+                localStorage.setItem("minutes", prevMins + 1);
                 return prevMins + 1;
               }
             });
+            localStorage.setItem("seconds", 0);
             return 0;
           } else {
+            localStorage.setItem("seconds", prevSec + 1);
             return prevSec + 1;
           }
         });
