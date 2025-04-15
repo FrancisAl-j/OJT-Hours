@@ -12,20 +12,30 @@ const Time = () => {
   );
   const [isActive, setIsActive] = useState(false);
 
-  const getTime = () => {
-    //const time = Date.now();
-    //setHours(Math.floor((1000 * 60 * 60) % 24));
-    //setMinutes(Math.floor((1000 / 60) % 60));
+  const startTime = () => {
+    setIsActive(!isActive);
+
+    if (isActive) {
+      localStorage.setItem("isActive", false);
+    } else {
+      localStorage.setItem("isActive", true);
+    }
   };
 
   useEffect(() => {
     let interval;
+    // it will only run if the isActive state is true
     if (isActive) {
       interval = setInterval(() => {
+        // Setting the seconds functionality
         setSeconds((prevSec) => {
+          // In order to refresh the number to 0 we need to get the previous value of seconds then checks if it is equal to 59
           if (prevSec === 59) {
+            // If the seconds is equal to 59 then it will increment the minutes by 1
             setMinutes((prevMins) => {
+              // This checks if the previous minutes is equal to 59 if so, the minutes will refresh to 0
               if (prevMins === 59) {
+                // then adds to hours state by 1
                 setHours((hours) => {
                   hours + 1;
                   localStorage.setItem("hours", hours + 1);
