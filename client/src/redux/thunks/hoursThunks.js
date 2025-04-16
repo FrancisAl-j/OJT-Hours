@@ -13,3 +13,16 @@ export const createHours = createAsyncThunk(
     }
   }
 );
+
+export const getHours = createAsyncThunk(
+  "hours/get",
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await hours.get();
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Sign-in failed");
+    }
+  }
+);

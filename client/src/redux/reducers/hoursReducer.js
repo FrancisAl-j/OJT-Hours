@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createHours } from "../thunks/hoursThunks.js";
+import { createHours, getHours } from "../thunks/hoursThunks.js";
 const initialState = {
   hours: 0,
   minutes: 0,
@@ -30,6 +30,25 @@ const hoursSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     });
+    //! END FOR CREATE HOURS
+
+    //! FOR GETTING THE HOURS DATA
+    builder.addCase(getHours.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+
+    builder.addCase(getHours.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.hoursData = action.payload;
+      state.error = null;
+    });
+
+    builder.addCase(getHours.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+    //! END FOR GET HOURS
   },
 });
 
