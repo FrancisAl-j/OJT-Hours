@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createHours } from "../redux/thunks/hoursThunks.js";
 
 const PopUpHours = ({ setShow }) => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     time: "",
     hoursTarget: "",
@@ -15,13 +18,27 @@ const PopUpHours = ({ setShow }) => {
     });
   };
 
-  const createHours = async (e) => {
+  const handleCreateHours = async (e) => {
     e.preventDefault();
+    const { time, hoursTarget } = formData;
+    const result = dispatch(
+      createHours({ time: Number(time), hoursTarget: Number(hoursTarget) })
+    );
+
+    if (createHours.fulfilled.match(result)) {
+      setFormData({
+        time: "",
+        hoursTarget: "",
+      });
+    }
   };
 
   return (
     <div className="transparent-bg w-full h-[100svh] fixed top-0 left-0 grid place-items-center bg-black">
-      <form className="form-container bg-[#169976] p-3 flex flex-col rounded-xl">
+      <form
+        onSubmit={handleCreateHours}
+        className="form-container bg-[#169976] p-3 flex flex-col rounded-xl"
+      >
         <header className="mb-10">
           <h1 className="text-2xl text-white font-semibold">
             Enter your OJT hours details
@@ -45,7 +62,9 @@ const PopUpHours = ({ setShow }) => {
             <span className="text-xl text-white">Target Hours</span>
             <input
               type="number"
-              name=""
+              name="hoursTarget"
+              value={formData.hoursTarget}
+              onChange={handleChange}
               id=""
               className="border-[1px] py-2 px-5 rounded-3xl bg-white"
             />

@@ -16,4 +16,14 @@ export const hours = {
       throw error;
     }
   },
+
+  get: async () => {
+    try {
+      const res = await axios.get(`${baseURL}get`, { withCredentials: true });
+
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
