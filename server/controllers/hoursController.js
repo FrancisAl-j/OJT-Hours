@@ -44,7 +44,7 @@ export const updateHours = async (req, res) => {
 
 // Getting the hours data based on user's id
 
-export const getHours = async () => {
+export const getHours = async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
     if (!user) {

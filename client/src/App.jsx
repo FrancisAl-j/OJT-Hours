@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import { checkAuth } from "./redux/thunks/authThunks.js";
+import { getHours } from "./redux/thunks/hoursThunks.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(checkAuth());
+    dispatch(getHours());
   }, []);
 
   if (isCheckingAuth && !user) {
