@@ -15,7 +15,6 @@ import { checkAuth } from "./redux/thunks/authThunks.js";
 const App = () => {
   const dispatch = useDispatch();
   const { user, isCheckingAuth } = useSelector((state) => state.auth);
-  console.log(user);
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -31,7 +30,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="">
+      <div className="relative">
         <Nav />
 
         <main>

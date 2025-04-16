@@ -41,3 +41,20 @@ export const updateHours = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Getting the hours data based on user's id
+
+export const getHours = async () => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(401).json({ message: "User not authenticated." });
+    }
+
+    const hours = await Hours.findOne({ userId: user._id });
+
+    res.status(200).json(hours);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
