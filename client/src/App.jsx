@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "./components/Nav";
 import {
   BrowserRouter as Router,
@@ -12,15 +12,27 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import { checkAuth } from "./redux/thunks/authThunks.js";
 import { getHours } from "./redux/thunks/hoursThunks.js";
+import Time from "./components/Time.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
+
   const { user, isCheckingAuth } = useSelector((state) => state.auth);
+  const [redirectToTimer, setRedirectToTimer] = useState(false);
 
   useEffect(() => {
-    dispatch(checkAuth());
-    dispatch(getHours());
-  }, []);
+    const check = async () => {
+      const result = await dispatch(checkAuth());
+      dispatch(getHours());
+
+      if (!checkAuth.fulfilled.match(result)) {
+        setRedirectToTimer(true);
+      }
+    };
+
+    check();
+  }, [dispatch]);
 
   if (isCheckingAuth && !user) {
     return (
@@ -49,6 +61,10 @@ const App = () => {
               path="/signup"
               element={user ? <Navigate to="/" /> : <Signup />}
             />
+
+            <Route path="/error/timer" element={<Time />} />
+
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
       </div>

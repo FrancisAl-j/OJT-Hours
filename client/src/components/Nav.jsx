@@ -46,10 +46,13 @@ const Nav = () => {
                   <img src={Clock} alt="" className="aspect-square w-11" />
                   <p className="text-xl text-white">Count Hours</p>
                 </li>
-                <li className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]">
-                  <img src={Profile} alt="" className="aspect-square w-11" />
-                  <p className="text-xl text-white">Profile</p>
-                </li>
+                <Link to="/profile">
+                  <li className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]">
+                    <img src={Profile} alt="" className="aspect-square w-11" />
+                    <p className="text-xl text-white">Profile</p>
+                  </li>
+                </Link>
+
                 <li
                   className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F] cursor-pointer"
                   onClick={handleLogout}
