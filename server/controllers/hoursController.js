@@ -42,7 +42,11 @@ export const updateHours = async (req, res) => {
 
     await history.save();
 
-    const hours = await Hours.findByIdAndUpdate(id, { time }, { new: true });
+    const hours = await Hours.findByIdAndUpdate(
+      id,
+      { $inc: { time } },
+      { new: true }
+    );
 
     res.status(200).json(hours);
   } catch (error) {
