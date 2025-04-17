@@ -20,7 +20,13 @@ const Home = () => {
             your working hours. Never lose track of your hours.
           </p>
           {hoursData ? (
-            <div></div>
+            <div className="flex text-white items-center gap-3">
+              <h1 className="text-6xl font-bold">{hoursData?.time} hrs</h1>
+              <span className="text-4xl font-bold">/</span>
+              <h1 className="text-6xl font-bold text-green-500">
+                {hoursData?.hoursTarget} hrs
+              </h1>
+            </div>
           ) : (
             <>
               <button
