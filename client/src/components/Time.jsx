@@ -10,7 +10,9 @@ const Time = () => {
   const [seconds, setSeconds] = useState(
     parseInt(localStorage.getItem("seconds")) || 0
   );
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(
+    localStorage.getItem("isActive") || false
+  );
 
   const startTime = () => {
     setIsActive(!isActive);
@@ -71,12 +73,28 @@ const Time = () => {
           <h1 className="text-white font-bold text-4xl">{seconds} sec</h1>
         </div>
 
-        <button
-          onClick={() => setIsActive(!isActive)}
-          className="px-7 py-2 bg-[#169976] cursor-pointer rounded-lg w-full text-white font-semibold text-2xl"
-        >
-          {isActive ? "Pause" : "Start"}
-        </button>
+        {seconds === 0 ? (
+          <button
+            onClick={startTime}
+            className="px-7 py-2 bg-[#169976] cursor-pointer rounded-lg w-full text-white font-semibold text-2xl"
+          >
+            Start
+          </button>
+        ) : (
+          <div className="flex w-full gap-2">
+            <button
+              onClick={startTime}
+              className={`px-7 py-2 ${
+                isActive ? "bg-red-400" : "bg-gray-700"
+              }  cursor-pointer rounded-lg w-full text-white font-semibold text-2xl`}
+            >
+              {isActive ? "Pause" : "Resume"}
+            </button>
+            <button className="px-7 py-2 bg-green-600 cursor-pointer rounded-lg w-full text-white font-semibold text-2xl">
+              Submit
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
