@@ -9,14 +9,14 @@ import {
 const router = express.Router();
 
 /**
+ * PUT
+ */
+router.put("/update/:id", verifyToken, updateHours);
+
+/**
  * POST
  */
 router.post("/create", verifyToken, createHours);
-
-/**
- * PUT
- */
-router.put("/update", verifyToken, updateHours);
 
 /**
  * GET

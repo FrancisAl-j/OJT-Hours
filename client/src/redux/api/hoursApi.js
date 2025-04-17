@@ -26,4 +26,18 @@ export const hours = {
       throw error;
     }
   },
+
+  update: async ({ id, time, minutes, seconds }) => {
+    try {
+      const res = await axios.put(
+        `${baseURL}update/${id}`,
+        { time, minutes, seconds },
+        { withCredentials: true }
+      );
+
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
