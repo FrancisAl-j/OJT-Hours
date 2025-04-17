@@ -1,5 +1,6 @@
 import Hours from "../models/hoursModel.js";
 import User from "../models/userModel.js";
+import History from "../models/historyModel.js";
 
 // Creating Hours
 export const createHours = async (req, res) => {
@@ -33,6 +34,13 @@ export const updateHours = async (req, res) => {
     if (!user) {
       return res.status(401).json({ message: "User not authenticated." });
     }
+
+    const history = new History({
+      hours: time,
+      userId: user._id,
+    });
+
+    await history.save();
 
     const hours = await Hours.findByIdAndUpdate(id, { time }, { new: true });
 
