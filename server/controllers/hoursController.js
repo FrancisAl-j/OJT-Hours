@@ -27,7 +27,7 @@ export const createHours = async (req, res) => {
 // Updating Hours
 export const updateHours = async (req, res) => {
   const { id } = req.params;
-  const { time } = req.body;
+  const { time, minutes, seconds } = req.body;
 
   try {
     const user = await User.findById(req.user.id);
@@ -37,6 +37,8 @@ export const updateHours = async (req, res) => {
 
     const history = new History({
       hours: time,
+      minutes,
+      seconds,
       userId: user._id,
     });
 
