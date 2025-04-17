@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { updateHours, getHours } from "../redux/thunks/hoursThunks.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const Time = () => {
+  const dispatch = useDispatch();
+  const { hoursData } = useSelector((state) => state.hours);
   const [hours, setHours] = useState(
     parseInt(localStorage.getItem("hours")) || 0
   );
@@ -13,9 +17,12 @@ const Time = () => {
   const [isActive, setIsActive] = useState(
     localStorage.getItem("isActive") || false
   );
+  const [start, setStart] = useState(localStorage.getItem("start") || false);
 
   const startTime = () => {
     setIsActive(!isActive);
+    setStart(true);
+    localStorage.setItem("start", true);
 
     if (isActive) {
       localStorage.setItem("isActive", false);
@@ -62,6 +69,24 @@ const Time = () => {
     return () => clearInterval(interval);
   }, [isActive]);
 
+  const handleSubmitHours = async () => {
+    const result = await dispatch(
+      updateHours({ id: hoursData?._id, time: hours, minutes, seconds })
+    );
+
+    if (updateHours.fulfilled.match(result)) {
+      dispatch(getHours());
+      localStorage.removeItem("seconds");
+      localStorage.removeItem("minutes");
+      localStorage.removeItem("hours");
+      localStorage.removeItem("isActive");
+      setSeconds(0);
+      setMinutes(0);
+      setHours(0);
+      setIsActive(false);
+    }
+  };
+
   return (
     <section className="h-[100svh] grid place-items-center">
       <div className="clock-container flex flex-col items-center gap-10 shadow-2xl shadow-black p-5">
@@ -73,7 +98,7 @@ const Time = () => {
           <h1 className="text-white font-bold text-4xl">{seconds} sec</h1>
         </div>
 
-        {seconds === 0 ? (
+        {!start ? (
           <button
             onClick={startTime}
             className="px-7 py-2 bg-[#169976] cursor-pointer rounded-lg w-full text-white font-semibold text-2xl"
@@ -90,7 +115,10 @@ const Time = () => {
             >
               {isActive ? "Pause" : "Resume"}
             </button>
-            <button className="px-7 py-2 bg-green-600 cursor-pointer rounded-lg w-full text-white font-semibold text-2xl">
+            <button
+              onClick={handleSubmitHours}
+              className="px-7 py-2 bg-green-600 cursor-pointer rounded-lg w-full text-white font-semibold text-2xl"
+            >
               Submit
             </button>
           </div>
