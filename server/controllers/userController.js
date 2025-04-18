@@ -111,3 +111,37 @@ export const checkAuth = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+/**
+ * Update User Profile API
+ */
+export const updateProfile = async (req, res) => {
+  const { id } = req.params;
+  const { username, password } = req.body;
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(401).json({ message: "User not authenticated" });
+    }
+
+    // Collects the data need
+    const updatedData = {
+      username,
+    };
+
+    // If the user wants to change the password it will be added to updateData object
+    if (password) {
+      updatedData.password = bcrypt.hashSync(password, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(id, updatedData, {
+      new: true,
+    });
+
+    const { password: _, ...rest } = updatedUser._doc;
+
+    res.status(200).json(rest);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

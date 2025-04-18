@@ -4,6 +4,7 @@ import {
   signin,
   signup,
   checkAuth,
+  updateProfile,
 } from "../controllers/userController.js";
 import { verifyToken } from "../utils/verifyUser.js";
 
@@ -24,5 +25,12 @@ router.post("/logout", logout); // TODO: Logout API
  *
  */
 router.get("/check", verifyToken, checkAuth); // TODO: Checking authentication to keep the user logged in
+
+/**
+ *
+ * PUT API
+ *
+ */
+router.put("/update/:id", verifyToken, updateProfile);
 
 export default router;
