@@ -38,7 +38,7 @@ export const signup = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Sign-in failed");
+      return rejectWithValue(error.response?.data?.message || "Sign-up failed");
     }
   }
 );
@@ -49,6 +49,20 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 
     return res.data;
   } catch (error) {
-    return rejectWithValue(error.response?.data?.message || "Sign-in failed");
+    return rejectWithValue(error.response?.data?.message || "Logout failed");
   }
 });
+
+// UPDATING PROFILE USER
+export const updateProfile = createAsyncThunk(
+  "auth/upated",
+  async ({ id, formData }, [rejectWithValue]) => {
+    try {
+      const updatedData = await auth.updateProfile({ id, formData });
+
+      return updatedData;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Update failed");
+    }
+  }
+);

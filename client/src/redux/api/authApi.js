@@ -39,6 +39,7 @@ export const auth = {
     }
   },
 
+  //! Logging out
   logout: async () => {
     try {
       const res = await axios.post(
@@ -48,6 +49,19 @@ export const auth = {
       );
 
       return res;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  //! Updating user profile
+  updateProfile: async ({ id, formData }) => {
+    try {
+      const res = await axios.put(`${baseURL}update/${id}`, formData, {
+        withCredentials: true,
+      });
+
+      return res.data;
     } catch (error) {
       throw error;
     }
