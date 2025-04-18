@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { updateHours, getHours } from "../redux/thunks/hoursThunks.js";
 import { useDispatch, useSelector } from "react-redux";
-import { startTime, pauseTime } from "../redux/reducers/hoursReducer.js";
+import {
+  startTime,
+  pauseTime,
+  stopTime,
+} from "../redux/reducers/hoursReducer.js";
 
 const Time = () => {
   const dispatch = useDispatch();
@@ -10,9 +14,18 @@ const Time = () => {
   );
 
   const handleSubmitHours = async () => {
-    await dispatch(
+    const result = await dispatch(
       updateHours({ id: hoursData?._id, time: hours, minutes, seconds })
     );
+
+    if (updateHours.fulfilled.match(result)) {
+      dispatch(stopTime());
+      dispatch(getHours());
+      localStorage.removeItem("seconds");
+      localStorage.removeItem("minutes");
+      localStorage.removeItem("hours");
+      localStorage.removeItem("isActive");
+    }
   };
 
   return (
