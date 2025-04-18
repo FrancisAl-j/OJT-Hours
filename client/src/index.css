@@ -26,3 +26,14 @@ body {
   -webkit-backdrop-filter: blur(7.3px);
   border: 1px solid rgba(0, 0, 0, 0.11);
 }
+
+.profile-container {
+  width: min(100% - 20px, 800px);
+}
+
+.input-style {
+  background: #222222;
+  border: 1px solid #ffffff;
+  padding: 10px 20px;
+  color: #fff;
+}
