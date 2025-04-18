@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import History from "../components/History";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateProfile } from "../redux/thunks/authThunks.js";
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     username: user?.username || "",
@@ -18,12 +20,28 @@ const Profile = () => {
       [name]: value,
     });
   };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    const { username, password } = formData;
+
+    const result = await dispatch(
+      updateProfile({ id: user?._id, username, password })
+    );
+
+    console.log(result);
+  };
+
   return (
     <section className="h-[100svh] w-full grid place-item-center">
       <div className="flex w-full">
         <History />
 
-        <form className=" w-full h-full grid place-items-center ">
+        <form
+          onSubmit={handleUpdate}
+          className=" w-full h-full grid place-items-center "
+        >
           <div className="profile-container mx-auto bg-[#169976] p-3 rounded-2xl">
             <header className="mb-10">
               <h1 className="text-4xl font-bold uppercase text-center text-white">
@@ -37,7 +55,6 @@ const Profile = () => {
                 <input
                   type="text"
                   name="username"
-                  id=""
                   value={formData.username}
                   onChange={handleChange}
                   className="input-style rounded-4xl"
@@ -50,7 +67,6 @@ const Profile = () => {
                   disabled
                   type="email"
                   name="email"
-                  id=""
                   value={formData.email}
                   onChange={handleChange}
                   className="input-style rounded-4xl hover:cursor-not-allowed"
@@ -62,14 +78,16 @@ const Profile = () => {
                 <input
                   type="password"
                   name="password"
-                  id=""
                   value={formData.password}
                   onChange={handleChange}
                   className="input-style rounded-4xl"
                 />
               </div>
 
-              <button className="p-2 bg-[#222] text-white text-xl rounded-3xl cursor-pointer hover:bg-green-700">
+              <button
+                type="submit"
+                className="p-2 bg-[#222] text-white text-xl rounded-3xl cursor-pointer hover:bg-green-700"
+              >
                 Update Profile
               </button>
 

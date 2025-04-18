@@ -55,11 +55,15 @@ export const auth = {
   },
 
   //! Updating user profile
-  updateProfile: async ({ id, formData }) => {
+  updateProfile: async ({ id, username, password }) => {
     try {
-      const res = await axios.put(`${baseURL}update/${id}`, formData, {
-        withCredentials: true,
-      });
+      const res = await axios.put(
+        `${baseURL}update/${id}`,
+        { username, password },
+        {
+          withCredentials: true,
+        }
+      );
 
       return res.data;
     } catch (error) {

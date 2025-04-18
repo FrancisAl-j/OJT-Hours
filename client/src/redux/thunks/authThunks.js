@@ -55,10 +55,10 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 
 // UPDATING PROFILE USER
 export const updateProfile = createAsyncThunk(
-  "auth/upated",
-  async ({ id, formData }, [rejectWithValue]) => {
+  "auth/update",
+  async ({ id, username, password }, { rejectWithValue }) => {
     try {
-      const updatedData = await auth.updateProfile({ id, formData });
+      const updatedData = await auth.updateProfile({ id, username, password });
 
       return updatedData;
     } catch (error) {
