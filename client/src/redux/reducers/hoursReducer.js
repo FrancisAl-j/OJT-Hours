@@ -4,8 +4,8 @@ const initialState = {
   hours: parseInt(localStorage.getItem("hours")) || 0,
   minutes: parseInt(localStorage.getItem("minutes")) || 0,
   seconds: parseInt(localStorage.getItem("seconds")) || 0,
-  isActive: localStorage.getItem("isActive") || false,
-  start: localStorage.getItem("start") || false,
+  isActive: localStorage.getItem("isActive") === "true" || false,
+  start: localStorage.getItem("start") === "true" || false,
   isLoading: false,
   error: null,
   hoursData: null,
@@ -15,20 +15,28 @@ const hoursSlice = createSlice({
   name: "hours",
   initialState,
   reducers: {
-    startTime: (state, action) => {
+    startTime: (state) => {
       state.isActive = true;
       state.start = true;
+      localStorage.setItem("isActive", true);
+      localStorage.setItem("start", true);
+    },
+    runningTime: (state, action) => {
       state.seconds += 1;
-      localStorage("seconds", (state.seconds += 1));
+      const seconds = state.seconds;
+      localStorage.setItem("seconds", seconds);
+
       if (state.seconds === 59) {
-        localStorage("minutes", (state.minutes += 1));
-        state.seconds = 0;
         state.minutes += 1;
+        const minutes = state.minutes;
+        localStorage.setItem("minutes", minutes);
+        state.seconds = 0;
       }
       if (state.minutes === 59) {
-        localStorage("hours", (state.hours += 1));
-        state.minutes = 0;
         state.hours += 1;
+        const hours = state.hours;
+        localStorage.setItem("hours", hours);
+        state.minutes = 0;
       }
     },
 
@@ -42,6 +50,7 @@ const hoursSlice = createSlice({
 
     pauseTime: (state) => {
       state.isActive = false;
+      localStorage.setItem("isActive", false);
     },
   },
   extraReducers: (builder) => {
@@ -100,5 +109,6 @@ const hoursSlice = createSlice({
   },
 });
 
-export const { startTime, stopTime } = hoursSlice.actions;
+export const { startTime, stopTime, runningTime, pauseTime } =
+  hoursSlice.actions;
 export default hoursSlice.reducer;

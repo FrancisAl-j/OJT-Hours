@@ -14,6 +14,7 @@ import { checkAuth } from "./redux/thunks/authThunks.js";
 import { getHours } from "./redux/thunks/hoursThunks.js";
 import Time from "./components/Time.jsx";
 import Profile from "./pages/Profile.jsx";
+import TimerEngine from "./components/TimerEngine.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ const App = () => {
     <Router>
       <div className="relative">
         <Nav />
+
+        {/* Invisible component for running the timer globally */}
+        <TimerEngine />
 
         <main>
           <Routes>

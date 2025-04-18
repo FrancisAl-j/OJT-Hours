@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { updateHours, getHours } from "../redux/thunks/hoursThunks.js";
 import { useDispatch, useSelector } from "react-redux";
-import { startTime } from "../redux/reducers/hoursReducer.js";
+import { startTime, pauseTime } from "../redux/reducers/hoursReducer.js";
 
 const Time = () => {
   const dispatch = useDispatch();
@@ -9,10 +9,10 @@ const Time = () => {
     (state) => state.hours
   );
 
-  const handleStartTime = () => {
-    dispatch(startTime());
-    localStorage.setItem("start", true);
-    localStorage.setItem("isActive", true);
+  const handleSubmitHours = async () => {
+    await dispatch(
+      updateHours({ id: hoursData?._id, time: hours, minutes, seconds })
+    );
   };
 
   return (
@@ -28,7 +28,7 @@ const Time = () => {
 
         {!start ? (
           <button
-            onClick={handleStartTime}
+            onClick={() => dispatch(startTime())}
             className="px-7 py-2 bg-[#169976] cursor-pointer rounded-lg w-full text-white font-semibold text-2xl"
           >
             Start
@@ -36,7 +36,11 @@ const Time = () => {
         ) : (
           <div className="flex w-full gap-2">
             <button
-              onClick={startTime}
+              onClick={
+                isActive
+                  ? () => dispatch(pauseTime())
+                  : () => dispatch(startTime())
+              }
               className={`px-7 py-2 ${
                 isActive ? "bg-red-400" : "bg-gray-700"
               }  cursor-pointer rounded-lg w-full text-white font-semibold text-2xl`}
