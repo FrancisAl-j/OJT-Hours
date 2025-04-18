@@ -25,6 +25,7 @@ const Time = () => {
       localStorage.removeItem("minutes");
       localStorage.removeItem("hours");
       localStorage.removeItem("isActive");
+      localStorage.removeItem("start");
     }
   };
 

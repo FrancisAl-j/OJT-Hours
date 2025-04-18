@@ -15,7 +15,15 @@ const Nav = () => {
   const [show, setShow] = useState(false);
 
   const handleLogout = async () => {
-    await dispatch(logout());
+    const result = await dispatch(logout());
+
+    if (logout.fulfilled.match(result)) {
+      localStorage.removeItem("seconds");
+      localStorage.removeItem("minutes");
+      localStorage.removeItem("hours");
+      localStorage.removeItem("isActive");
+      localStorage.removeItem("start");
+    }
   };
 
   return (
@@ -36,18 +44,27 @@ const Nav = () => {
             {show && (
               <ul className="absolute bg-[#169976] w-[230px] right-0 shadow-xl shadow-black flex flex-col">
                 <Link to="/">
-                  <li className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]">
+                  <li
+                    onClick={() => setShow(false)}
+                    className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]"
+                  >
                     <img src={Home} alt="" className="aspect-square w-11" />
                     <p className="text-xl text-white">Home</p>
                   </li>
                 </Link>
 
-                <li className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]">
+                <li
+                  onClick={() => setShow(false)}
+                  className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]"
+                >
                   <img src={Clock} alt="" className="aspect-square w-11" />
                   <p className="text-xl text-white">Count Hours</p>
                 </li>
                 <Link to="/profile">
-                  <li className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]">
+                  <li
+                    onClick={() => setShow(false)}
+                    className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]"
+                  >
                     <img src={Profile} alt="" className="aspect-square w-11" />
                     <p className="text-xl text-white">Profile</p>
                   </li>
