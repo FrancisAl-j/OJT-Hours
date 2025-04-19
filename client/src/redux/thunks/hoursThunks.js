@@ -39,3 +39,18 @@ export const updateHours = createAsyncThunk(
     }
   }
 );
+
+export const getHisotry = createAsyncThunk(
+  "hours/history",
+  async (_, { rejectWithValue }) => {
+    try {
+      const history = await hours.getHistory();
+
+      return history;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Getting History failed"
+      );
+    }
+  }
+);

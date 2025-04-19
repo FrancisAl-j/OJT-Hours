@@ -40,4 +40,16 @@ export const hours = {
       throw error;
     }
   },
+
+  getHistory: async () => {
+    try {
+      const res = await axios.get(`${baseURL}get/history`, {
+        withCredentials: true,
+      });
+
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
