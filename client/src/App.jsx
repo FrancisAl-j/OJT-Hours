@@ -24,19 +24,20 @@ const App = () => {
 
   useEffect(() => {
     const check = async () => {
-      const result = await dispatch(checkAuth());
-      if (user) {
+      if (isCheckingAuth && !user) {
+        const result = await dispatch(checkAuth());
+
         dispatch(getHours());
         dispatch(getHistory());
-      }
 
-      if (!checkAuth.fulfilled.match(result)) {
-        setRedirectToTimer(true);
+        if (!checkAuth.fulfilled.match(result)) {
+          setRedirectToTimer(true);
+        }
       }
     };
 
     check();
-  }, [dispatch]);
+  }, []);
 
   if (isCheckingAuth && !user) {
     return (
