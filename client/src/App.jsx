@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import { checkAuth } from "./redux/thunks/authThunks.js";
-import { getHours } from "./redux/thunks/hoursThunks.js";
+import { getHours, getHistory } from "./redux/thunks/hoursThunks.js";
 import Time from "./components/Time.jsx";
 import Profile from "./pages/Profile.jsx";
 import TimerEngine from "./components/TimerEngine.jsx";
@@ -25,7 +25,10 @@ const App = () => {
   useEffect(() => {
     const check = async () => {
       const result = await dispatch(checkAuth());
-      dispatch(getHours());
+      if (user) {
+        dispatch(getHours());
+        dispatch(getHistory());
+      }
 
       if (!checkAuth.fulfilled.match(result)) {
         setRedirectToTimer(true);

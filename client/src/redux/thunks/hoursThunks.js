@@ -40,7 +40,7 @@ export const updateHours = createAsyncThunk(
   }
 );
 
-export const getHisotry = createAsyncThunk(
+export const getHistory = createAsyncThunk(
   "hours/history",
   async (_, { rejectWithValue }) => {
     try {
