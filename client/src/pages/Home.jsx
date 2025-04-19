@@ -12,7 +12,7 @@ const Home = () => {
     <div>
       <section className="h-[70svh] grid place-items-center">
         <div className="hero-content flex flex-col items-center gap-8">
-          <h1 className="text-[#1DCD9F] text-8xl font-semibold capitalize">
+          <h1 className="text-[#1DCD9F] text-6xl font-semibold capitalize">
             Welcome {user?.username}
           </h1>
           <p className="text-white text-2xl text-center">

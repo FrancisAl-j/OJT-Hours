@@ -2,6 +2,7 @@ import express from "express";
 import { verifyToken } from "../utils/verifyUser.js";
 import {
   createHours,
+  getHistory,
   getHours,
   updateHours,
 } from "../controllers/hoursController.js";
@@ -22,5 +23,6 @@ router.post("/create", verifyToken, createHours);
  * GET
  */
 router.get("/get", verifyToken, getHours);
+router.get("/get/history", verifyToken, getHistory);
 
 export default router;

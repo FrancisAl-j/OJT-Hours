@@ -72,3 +72,16 @@ export const getHours = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Getting Histories of Hours
+export const getHistory = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const history = await History.find({ userId });
+
+    res.status(200).json(history);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
