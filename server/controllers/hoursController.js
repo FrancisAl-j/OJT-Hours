@@ -31,6 +31,7 @@ export const updateHours = async (req, res) => {
   const { time, minutes, seconds } = req.body;
 
   try {
+    const cachedKey = "history";
     const user = await User.findById(req.user.id);
     if (!user) {
       return res.status(401).json({ message: "User not authenticated." });
@@ -44,6 +45,9 @@ export const updateHours = async (req, res) => {
     });
 
     await history.save();
+
+    const allHistory = await History.find({ userId: user._id });
+    await redisClient.setEx(cachedKey, 3600, JSON.stringify(allHistory));
 
     const hours = await Hours.findByIdAndUpdate(
       id,
