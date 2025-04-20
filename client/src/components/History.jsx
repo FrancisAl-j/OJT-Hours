@@ -29,7 +29,7 @@ const History = () => {
             <h1>You don't have hours rendered yet</h1>
           </div>
         ) : (
-          <div className="flex flex-col gap-2 px-2 flex-1">
+          <div className="flex flex-col gap-2 px-2 flex-1 overflow-y-scroll">
             {histories?.map((data, index) => {
               const date = new Date(data?.createdAt);
               const formattedDate = date.toISOString().split("T")[0]; // "2025-04-18
