@@ -52,14 +52,16 @@ const Nav = () => {
                     <p className="text-xl text-white">Home</p>
                   </li>
                 </Link>
+                <a href="http://localhost:5173/#time">
+                  <li
+                    onClick={() => setShow(false)}
+                    className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]"
+                  >
+                    <img src={Clock} alt="" className="aspect-square w-11" />
+                    <p className="text-xl text-white">Count Hours</p>
+                  </li>
+                </a>
 
-                <li
-                  onClick={() => setShow(false)}
-                  className="flex items-center justify-between pr-4 py-3 hover:bg-[#1DCD9F]"
-                >
-                  <img src={Clock} alt="" className="aspect-square w-11" />
-                  <p className="text-xl text-white">Count Hours</p>
-                </li>
                 <Link to="/profile">
                   <li
                     onClick={() => setShow(false)}

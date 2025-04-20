@@ -30,7 +30,7 @@ const Time = () => {
   };
 
   return (
-    <section className="h-[100svh] grid place-items-center">
+    <section className="h-[100svh] grid place-items-center" id="time">
       <div className="clock-container flex flex-col items-center gap-10 shadow-2xl shadow-black p-5">
         <div className="flex items-center justify-between w-full">
           <h1 className="text-white font-bold text-4xl">{hours} hr</h1>

@@ -33,11 +33,24 @@ const History = () => {
             {histories?.map((data, index) => {
               const date = new Date(data?.createdAt);
               const formattedDate = date.toISOString().split("T")[0]; // "2025-04-18
+              // Arrays of name of days
+              const days = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+              ];
+              // The getDay() method, returns a number for example the date May, 19, 2025 it will check 19 and it will return 1 since 19 is monday
+              const dayName = days[date.getDay()];
               return (
                 <div
                   key={index}
                   className="bg-white shadow-xl rounded-xl p-2 flex flex-col gap-2"
                 >
+                  <h1 className="text-3xl font-bold">{dayName}</h1>
                   <div className="flex gap-2 items-center">
                     <img
                       src={Calendar}

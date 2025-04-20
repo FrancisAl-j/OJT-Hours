@@ -88,7 +88,6 @@ export const getHistory = async (req, res) => {
     }
 
     const history = await History.find({ userId });
-    console.log(history);
 
     await redisClient.setEx(cacheKey, 3600, JSON.stringify(history)); // Setting the history data to redis
 
