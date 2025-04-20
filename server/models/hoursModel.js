@@ -5,6 +5,9 @@ const hoursSchema = new mongoose.Schema(
     time: {
       type: Number,
     },
+    minutes: {
+      type: Number,
+    },
     hoursTarget: {
       type: Number,
       required: true,

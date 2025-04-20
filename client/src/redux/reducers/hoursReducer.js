@@ -33,13 +33,13 @@ const hoursSlice = createSlice({
       const seconds = state.seconds;
       localStorage.setItem("seconds", seconds);
 
-      if (state.seconds === 59) {
+      if (state.seconds >= 59) {
         state.minutes += 1;
         const minutes = state.minutes;
         localStorage.setItem("minutes", minutes);
         state.seconds = 0;
       }
-      if (state.minutes === 59) {
+      if (state.minutes >= 59) {
         state.hours += 1;
         const hours = state.hours;
         localStorage.setItem("hours", hours);

@@ -49,11 +49,20 @@ export const updateHours = async (req, res) => {
     const allHistory = await History.find({ userId: user._id });
     await redisClient.setEx(cachedKey, 3600, JSON.stringify(allHistory));
 
-    const hours = await Hours.findByIdAndUpdate(
+    const hours = await Hours.findById(id);
+    hours.time += time;
+    hours.minutes += minutes;
+    if (hours.minutes === 60) {
+      hours.minutes = 0;
+      hours.time += 1;
+    }
+
+    await hours.save();
+    /*const hours = await Hours.findByIdAndUpdate(
       id,
-      { $inc: { time } },
+      { $inc: { time, minutes } },
       { new: true }
-    );
+    );*/
 
     res.status(200).json(hours);
   } catch (error) {
