@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/token.js";
+import redisClient from "../utils/redis.js";
 
 /**
  * User Sign up API
@@ -88,7 +89,9 @@ export const signin = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
+    const cachedKey = "history";
     res.cookie("token", "", { maxAge: 0 });
+    await redisClient.del(cachedKey);
 
     res.status(200).json({ message: "Successfully logged out." });
   } catch (error) {
