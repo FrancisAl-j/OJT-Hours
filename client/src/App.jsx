@@ -15,6 +15,7 @@ import { getHours, getHistory } from "./redux/thunks/hoursThunks.js";
 import Time from "./components/Time.jsx";
 import Profile from "./pages/Profile.jsx";
 import TimerEngine from "./components/TimerEngine.jsx";
+import Footer from "./components/Footer.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,26 +25,20 @@ const App = () => {
 
   useEffect(() => {
     const check = async () => {
-      if (isCheckingAuth && !user) {
-        const result = await dispatch(checkAuth());
+      const result = await dispatch(checkAuth());
 
-        dispatch(getHours());
+      dispatch(getHours());
 
-        if (!checkAuth.fulfilled.match(result)) {
-          setRedirectToTimer(true);
-        }
+      if (!checkAuth.fulfilled.match(result)) {
+        setRedirectToTimer(true);
       }
     };
 
     check();
-  }, []);
+  }, [dispatch]);
 
   if (isCheckingAuth && !user) {
-    return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -74,6 +69,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );

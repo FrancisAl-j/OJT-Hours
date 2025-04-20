@@ -23,6 +23,7 @@ const Nav = () => {
       localStorage.removeItem("hours");
       localStorage.removeItem("isActive");
       localStorage.removeItem("start");
+      sessionStorage.removeItem("user");
     }
   };
 
