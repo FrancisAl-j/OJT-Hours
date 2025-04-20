@@ -17,11 +17,11 @@ export const checkAuth = createAsyncThunk(
 
 // Login / Signin
 export const signin = createAsyncThunk(
-  "auth/sigin",
+  "auth/signin",
   async (formData, { rejectWithValue }) => {
     try {
       const res = await auth.login(formData);
-
+      sessionStorage.setItem("user", JSON.stringify(res.data));
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Sign-in failed");
