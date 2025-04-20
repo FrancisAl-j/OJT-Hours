@@ -84,10 +84,12 @@ export const getHistory = async (req, res) => {
 
     // Checks if there is existing cachedHistory
     if (cachedHistory) {
-      return res.status(200).json(JSON.stringify(cachedHistory));
+      return res.status(200).json(JSON.parse(cachedHistory));
     }
 
     const history = await History.find({ userId });
+    console.log(history);
+
     await redisClient.setEx(cacheKey, 3600, JSON.stringify(history)); // Setting the history data to redis
 
     res.status(200).json(history);

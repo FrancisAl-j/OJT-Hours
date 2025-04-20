@@ -28,7 +28,6 @@ const App = () => {
         const result = await dispatch(checkAuth());
 
         dispatch(getHours());
-        dispatch(getHistory());
 
         if (!checkAuth.fulfilled.match(result)) {
           setRedirectToTimer(true);

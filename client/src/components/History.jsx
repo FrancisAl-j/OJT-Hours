@@ -1,13 +1,18 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Calendar from "../assets/history/calendar.svg";
 import Clock from "../assets/history/clock.svg";
+import { getHistory } from "../redux/thunks/hoursThunks.js";
 
 const History = () => {
+  const dispatch = useDispatch();
   const { histories, hoursData } = useSelector((state) => state.hours);
   console.log(histories);
 
-  // TODO: Removing the time on date
+  // Fetching the hours history of user
+  useEffect(() => {
+    dispatch(getHistory());
+  }, [dispatch]);
 
   return (
     <div className="w-full h-full grid place-items-center">
@@ -25,7 +30,7 @@ const History = () => {
           </div>
         ) : (
           <div className="flex flex-col gap-2 px-2 flex-1">
-            {histories.map((data, index) => {
+            {histories?.map((data, index) => {
               const date = new Date(data?.createdAt);
               const formattedDate = date.toISOString().split("T")[0]; // "2025-04-18
               return (
