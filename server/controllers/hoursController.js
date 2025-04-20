@@ -1,6 +1,7 @@
 import Hours from "../models/hoursModel.js";
 import User from "../models/userModel.js";
 import History from "../models/historyModel.js";
+import redisClient from "../utils/redis.js";
 
 // Creating Hours
 export const createHours = async (req, res) => {
@@ -76,9 +77,18 @@ export const getHours = async (req, res) => {
 // Getting Histories of Hours
 export const getHistory = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.id; // This is the id on the jwt token
+    const cacheKey = "history";
+
+    const cachedHistory = await redisClient.get(cacheKey); // Getting the history using the key "history"
+
+    // Checks if there is existing cachedHistory
+    if (cachedHistory) {
+      return res.status(200).json(JSON.stringify(cachedHistory));
+    }
 
     const history = await History.find({ userId });
+    await redisClient.setEx(cacheKey, 3600, JSON.stringify(history)); // Setting the history data to redis
 
     res.status(200).json(history);
   } catch (error) {
