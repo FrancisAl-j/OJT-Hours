@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../redux/thunks/authThunks.js";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet"; // FOR SEO
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,14 @@ const Signin = () => {
 
   return (
     <div className="h-[100svh] grid place-items-center">
+      <Helmet>
+        <title>Signin | OJT HOURS</title>
+        <meta
+          name="description"
+          content="Signin to explore what the page can offer."
+        />
+        <link rel="canonical" href="http://localhost:5173/signin" />
+      </Helmet>
       <section className="flex w-full">
         <div className="flex-1 grid place-items-center">
           <form

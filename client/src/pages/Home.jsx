@@ -9,9 +9,24 @@ const Home = () => {
   const { hoursData } = useSelector((state) => state.hours);
   const [show, setShow] = useState(false);
 
+  /**
+   *         "image": "https://smilebrightclinic.com/logo.png",
+        "url": "https://smilebrightclinic.com",
+        Add these to script when deployed
+   */
+
   return (
     <div>
       <Helmet>
+        <script type="application/ld+json">
+          {`
+      {
+        "@context": "https://schema.org",
+        "@type": "OJT",
+        "name": "OJT HOURS",
+      }
+    `}
+        </script>
         <title>Home | OJT HOURS</title>
         <meta
           name="description"
