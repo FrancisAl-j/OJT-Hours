@@ -17,7 +17,6 @@ import Profile from "./pages/Profile.jsx";
 import TimerEngine from "./components/TimerEngine.jsx";
 import Footer from "./components/Footer.jsx";
 import Loading from "./components/Loading.jsx";
-import { Helmet } from "react-helmet"; // For React SEO
 
 const App = () => {
   const dispatch = useDispatch();
