@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Time from "../components/Time";
 import PopUpHours from "../components/PopUpHours";
+import { Helmet } from "react-helmet"; // For SEO
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
@@ -10,6 +11,18 @@ const Home = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Home | OJT HOURS</title>
+        <meta
+          name="description"
+          content="This is a clock timer to track your rendered hours during OJT (On-the-Job-Trainer)"
+        />
+        <meta
+          name="keywords"
+          content="OJT, On-the-Job-Training, timer, rendered, time"
+        />
+        <link rel="canonical" href="http://localhost:5173/" />
+      </Helmet>
       <section className="h-[70svh] grid place-items-center">
         <div className="hero-content flex flex-col items-center gap-8">
           <h1 className="text-[#1DCD9F] xl:text-6xl font-semibold capitalize text-4xl text-center">

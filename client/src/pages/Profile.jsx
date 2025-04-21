@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import History from "../components/History";
 import { useSelector, useDispatch } from "react-redux";
 import { updateProfile } from "../redux/thunks/authThunks.js";
+import { Helmet } from "react-helmet";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,14 @@ const Profile = () => {
 
   return (
     <section className="h-auto py-10 xl:h-[100svh] w-full grid place-item-center">
+      <Helmet>
+        <title>Profile | OJT HOURS</title>
+        <meta
+          name="description"
+          content="Explore a responsive profile page that you can update anytime without worry and view your rendered hours history."
+        />
+        <link rel="canonical" href="http://localhost:5173/profile" />
+      </Helmet>
       <div className="flex-col-reverse xl:flex-row flex w-full gap-4">
         <History />
 

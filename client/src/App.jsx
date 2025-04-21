@@ -46,18 +46,6 @@ const App = () => {
   return (
     <Router>
       <div className="relative">
-        <Helmet>
-          <title>OJT HOURS</title>
-          <meta
-            name="description"
-            content="This is a clock timer to track your rendered hours during OJT (On-the-Job-Trainer)"
-          />
-          <meta
-            name="keywords"
-            content="OJT, On-the-Job-Training, timer, rendered, time"
-          />
-          <link rel="canonical" href="http://localhost:5173/" />
-        </Helmet>
         <Nav />
 
         {/* Invisible component for running the timer globally */}
