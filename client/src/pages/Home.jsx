@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Time from "../components/Time";
 import PopUpHours from "../components/PopUpHours";
-import { Helmet } from "react-helmet"; // For SEO
+import { Helmet } from "react-helmet-async"; // For SEO
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);

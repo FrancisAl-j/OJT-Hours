@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import History from "../components/History";
 import { useSelector, useDispatch } from "react-redux";
 import { updateProfile } from "../redux/thunks/authThunks.js";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
   const dispatch = useDispatch();

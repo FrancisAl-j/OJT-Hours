@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../redux/thunks/authThunks.js";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet"; // FOR SEO
+import { Helmet } from "react-helmet-async"; // FOR SEO
 
 const Signin = () => {
   const dispatch = useDispatch();
