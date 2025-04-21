@@ -34,8 +34,8 @@ const Profile = () => {
   };
 
   return (
-    <section className="h-[100svh] w-full grid place-item-center">
-      <div className="flex w-full">
+    <section className="h-auto py-10 xl:h-[100svh] w-full grid place-item-center">
+      <div className="flex-col-reverse xl:flex-row flex w-full gap-4">
         <History />
 
         <form

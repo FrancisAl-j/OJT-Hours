@@ -12,18 +12,22 @@ const Home = () => {
     <div>
       <section className="h-[70svh] grid place-items-center">
         <div className="hero-content flex flex-col items-center gap-8">
-          <h1 className="text-[#1DCD9F] text-6xl font-semibold capitalize">
+          <h1 className="text-[#1DCD9F] xl:text-6xl font-semibold capitalize text-4xl text-center">
             Welcome {user?.username}
           </h1>
-          <p className="text-white text-2xl text-center">
+          <p className="text-white text-lg xl:text-2xl text-center">
             This Web App will help you track your time/hours rendered during
             your working hours. Never lose track of your hours.
           </p>
           {hoursData ? (
             <div className="flex text-white items-center gap-3">
-              <h1 className="text-6xl font-bold">{hoursData?.time} hrs</h1>
-              <span className="text-4xl font-bold">/</span>
-              <h1 className="text-6xl font-bold text-green-500">
+              <h1 className="xl:text-6xl lg:text-4xl sm:text-3xl font-bold">
+                {hoursData?.time} hrs
+              </h1>
+              <span className="xl:text-6xl lg:text-4xl sm:text-4xl font-bold">
+                /
+              </span>
+              <h1 className="xl:text-6xl lg:text-4xl sm:text-3xl font-bold text-green-500">
                 {hoursData?.hoursTarget} hrs
               </h1>
             </div>

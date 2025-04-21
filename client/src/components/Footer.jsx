@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full bg-[#169976] text-white leading-10 py-6 px-2">
-      <div className="flex justify-between">
+      <div className="flex justify-between xl:flex-row flex-col gap-5 xl:items-start items-center">
         <h1 className="text-2xl font-bold">OJT HOURS</h1>
 
         <ul>

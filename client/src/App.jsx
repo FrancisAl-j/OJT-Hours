@@ -16,6 +16,7 @@ import Time from "./components/Time.jsx";
 import Profile from "./pages/Profile.jsx";
 import TimerEngine from "./components/TimerEngine.jsx";
 import Footer from "./components/Footer.jsx";
+import Loading from "./components/Loading.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
